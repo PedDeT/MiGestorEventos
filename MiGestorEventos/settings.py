@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -63,6 +64,14 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_FORMS = {
+    "signup": "eventos.forms.SignupForm",
+}
+
+AUTH_USER_MODEL = 'eventos.CustomUser'
+ACCOUNT_FORMS = {
+    "signup": "eventos.forms.CustomSignupForm",
+}
 
 ROOT_URLCONF = "MiGestorEventos.urls"
 
