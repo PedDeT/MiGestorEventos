@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Organizadores</title>
+</head>
+<body>
+    <h1>Organizadores</h1>
+    <ul>
+        {% for organizador in object_list %}
+            <li>{{ organizador.nombre }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'crear_organizador' %}">Crear nuevo organizador</a>
+</body>
+</html>
