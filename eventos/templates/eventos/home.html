@@ -1,10 +1,41 @@
-<h1>Welcome to My Site</h1>
+<h1>Bienvenido</h1>
 {% if user.is_authenticated %}
   <h2>Welcome, {{ user.username }}!</h2>
   <p>You are currently logged in.</p>
+<h3>Eventos:</h3>
+  <ul>
+    {% for evento in eventos %}
+      <li>
+        <strong>Nombre:</strong> {{ evento.nombre }}<br>
+        <strong>Lugar:</strong> {{ evento.lugar }}<br>
+        <strong>Fecha:</strong> {{ evento.fecha }}<br>
+        <strong>Organizador:</strong> {{ evento.organizador.username }}<br>
+        <a href="{% url 'eventos:editar_evento' evento.id %}">Editar Evento</a>
+      </li>
+    {% empty %}
+      <li>No hay eventos disponibles.</li>
+    {% endfor %}
+
+  </ul>
+  <p><a href="{% url 'eventos:crear_evento' %}">Crear Evento</a></p>
   <p><a href="{% url 'account_logout' %}">Log Out</a></p>
 {% else %}
   <h2>You are not logged in</h2>
+<h3>Eventos:</h3>
+  <ul>
+    {% for evento in eventos %}
+      <li>
+        <strong>Nombre:</strong> {{ evento.nombre }}<br>
+        <strong>Lugar:</strong> {{ evento.lugar }}<br>
+        <strong>Fecha:</strong> {{ evento.fecha }}<br>
+        <strong>Organizador:</strong> {{ evento.organizador.username }}<br>
+        <a href="{% url 'eventos:editar_evento' evento.id %}">Editar Evento</a>
+      </li>
+    {% empty %}
+      <li>No hay eventos disponibles.</li>
+    {% endfor %}
+  </ul>
+<p><a href="{% url 'eventos:crear_evento' %}">Crear Evento</a></p>
 {% endif %}
 
 <ul>
