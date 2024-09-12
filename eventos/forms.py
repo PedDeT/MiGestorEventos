@@ -18,6 +18,11 @@ class CustomSignupForm(SignupForm):
         return user
 
 class EventoForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)  # Get the user from kwargs
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = Evento
         fields = ["nombre", "lugar", "fecha"]
@@ -28,4 +33,13 @@ class EventoForm(forms.ModelForm):
             raise forms.ValidationError("El nombre del evento no es válido")
         return nombre
 
+    def save(self, commit=True):
+        evento = super().save(commit=False)
+        if self.user:
+            evento.organizador = self.user  # Set the current user as the organizer
+        if commit:
+            evento.save()
+        return evento
 
+class EliminarEventoForm(forms.Form):
+    confirm_delete = forms.BooleanField(label="Confirmar que desea eliminar el evento")

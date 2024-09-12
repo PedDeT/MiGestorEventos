@@ -6,7 +6,10 @@ from django.utils import timezone
 
 #Tabla para Usuarios
 class CustomUser(AbstractUser):
-    name = models.CharField(max_length=150)
+    nombre = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
 
 
 # Tabla para Eventos
